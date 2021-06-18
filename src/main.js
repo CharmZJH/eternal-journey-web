@@ -2,7 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import Vant from 'vant';
 import 'vant/lib/index.css';
-import router from "./router/index.js";
+import router from "./router";
 
-
-createApp(App).use(router).use(Vant).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.use(Vant)
+app.mount('#app')
