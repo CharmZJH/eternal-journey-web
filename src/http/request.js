@@ -2,39 +2,31 @@ import axios from 'axios';
 
 const baseURL = '/api'
 
-const get = axios.create({
-    method: 'get',
+const service = axios.create({
     baseURL,
-    timeout: 5000,
-    headers: {"content-type": "application/x-www-form-urlencoded", "Accept": "application/json"},
+    timeout: 20*1000
 });
-const post = axios.create({
-    method: 'post',
-    baseURL,
-    timeout: 5000,
-    headers: {"content-type": "application/x-www-form-urlencoded", "Accept": "application/json"},
-});
-post.interceptors.response.use(
-    response => {
-        return response.data
+// request interceptor
+service.interceptors.request.use(
+    config => {
+        // do something before request is sent
+        return config
     },
     error => {
-        return Promise.reject();
+        console.log(error) // for debug
+        return Promise.reject(error)
     }
-);
-const download = axios.create({
-    method: 'post',
-    baseURL,
-    timeout: 8000,
-    headers: {"content-type": "application/x-www-form-urlencoded", "Accept": "application/octet-stream"},
-});
+)
 
-download.interceptors.response.use(
+// response interceptor
+service.interceptors.response.use(
     response => {
-        return response
+       return response
     },
     error => {
-        return Promise.reject();
+        console.log('err' + error) // for debug
+        return Promise.reject(error)
     }
-);
-export default {get, post, download};
+)
+
+export default service;

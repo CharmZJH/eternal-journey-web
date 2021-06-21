@@ -22,9 +22,6 @@
 				<van-button round block type="info" v-on:click="onSubmit">提交</van-button>
 			</div>
 		</van-form>
-
-
-
 	</div>
 </template>
 
@@ -32,7 +29,7 @@
 	import {
 		reactive
 	} from 'vue';
-
+import {testPost} from '@/http/api/api1'
 
 	export default {
 		setup() {
@@ -60,7 +57,12 @@
 		},
 		methods: {
 			onSubmit() {
-				console.log('111')
+				console.log(this.state.orderNumber)
+                testPost(this.state).then(res=> {
+                    console.log(res)
+				}).catch(err=> {
+				    console.log(err)
+				})
 			}
 		}
 	};
