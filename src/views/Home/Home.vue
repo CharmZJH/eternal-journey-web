@@ -1,7 +1,7 @@
 <template>
-    <div>
-       777
-    </div>
+	<div>
+777
+	</div>
 </template>
 
 <script>
